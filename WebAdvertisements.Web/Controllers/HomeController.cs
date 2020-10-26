@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebAdvertisements.Web.Models;
+using WebAdvertisements.Web.ViewModels;
 
 namespace WebAdvertisements.Web.Controllers
 {

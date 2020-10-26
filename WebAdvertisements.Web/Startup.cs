@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
+using Polly.Extensions.Http;
 
 namespace WebAdvertisements.Web
 {
@@ -23,7 +28,27 @@ namespace WebAdvertisements.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllersWithViews();
+
+            services.AddCognitoIdentity(config =>
+            {
+                config.Password = new Microsoft.AspNetCore.Identity.PasswordOptions
+                {
+                    RequireDigit = false,
+                    RequiredLength = 6,
+                    RequiredUniqueChars = 0,
+                    RequireLowercase = false,
+                    RequireNonAlphanumeric = false,
+                    RequireUppercase = false
+                };
+            });
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Account/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,13 +61,15 @@ namespace WebAdvertisements.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

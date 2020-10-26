@@ -1,0 +1,45 @@
+﻿@{
+    //@ViewData["Title"]= "SignUp page";
+}
+
+@model WebAdvertisements.Web.ViewModels.Account.SignUpViewModel;
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-controller="Account" asp-action="SignUp">
+                <h4>Create a new account</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-2 box-shadow border-info rounded border " id="whySignup">
+        <div style="text-align:center" class="w-100">
+            <h2>Why Sign Up?</h2>
+        </div>
+        <p class="w-100">
+            If you sign up you will be able to sell advertisements!
+        </p>
+    </div>
+</div>
