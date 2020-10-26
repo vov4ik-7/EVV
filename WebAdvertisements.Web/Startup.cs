@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Polly;
 using Polly.Extensions.Http;
+using WebAdvertisements.Web.ServiceClients;
+using WebAdvertisements.Web.Services;
 
 namespace WebAdvertisements.Web
 {
@@ -49,6 +51,24 @@ namespace WebAdvertisements.Web
             {
                 config.LoginPath = "/Account/Login";
             });
+            services.AddScoped<IFileUploader, S3FileUploader>();
+            services.AddHttpClient<IAdvertApiClient, AdvertApiClient>()
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPatternPolicy());
+        }
+
+        private IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPatternPolicy()
+        {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .CircuitBreakerAsync(3, TimeSpan.FromSeconds(30));
+        }
+
+        private IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
+                .WaitAndRetryAsync(5, retryAttempy => TimeSpan.FromSeconds(Math.Pow(2, retryAttempy)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

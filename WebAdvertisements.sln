@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAdvertisements.Web", "WebAdvertisements.Web\WebAdvertisements.Web.csproj", "{AA62587C-DB21-4CCC-A122-254202646029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAdvertisements.Web", "WebAdvertisements.Web\WebAdvertisements.Web.csproj", "{AA62587C-DB21-4CCC-A122-254202646029}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdvertApi", "AdvertApi", "{4EDFE925-5F0A-4F4D-B4C0-7EB155F62FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAdvertisements.AdvertApi", "WebAdvertisements.AdvertApi\WebAdvertisements.AdvertApi.csproj", "{B33E34CE-A333-448D-BA77-08C5F6685474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAdvertisements.AdvertApi.Models", "WebAdvertisements.AdvertApi.Models\WebAdvertisements.AdvertApi.Models.csproj", "{A8F32F29-F019-439B-98DD-E0763BE0F6EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,21 @@ Global
 		{AA62587C-DB21-4CCC-A122-254202646029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA62587C-DB21-4CCC-A122-254202646029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA62587C-DB21-4CCC-A122-254202646029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33E34CE-A333-448D-BA77-08C5F6685474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33E34CE-A333-448D-BA77-08C5F6685474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33E34CE-A333-448D-BA77-08C5F6685474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33E34CE-A333-448D-BA77-08C5F6685474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F32F29-F019-439B-98DD-E0763BE0F6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F32F29-F019-439B-98DD-E0763BE0F6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F32F29-F019-439B-98DD-E0763BE0F6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F32F29-F019-439B-98DD-E0763BE0F6EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B33E34CE-A333-448D-BA77-08C5F6685474} = {4EDFE925-5F0A-4F4D-B4C0-7EB155F62FC0}
+		{A8F32F29-F019-439B-98DD-E0763BE0F6EA} = {4EDFE925-5F0A-4F4D-B4C0-7EB155F62FC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FCED1A2-F212-4F17-9977-1E6EF7442EDE}
