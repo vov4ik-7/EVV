@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebAdvertisements.AdvertApi.HealthChecks;
 using WebAdvertisements.AdvertApi.Services;
 
 namespace WebAdvertisements.AdvertApi
@@ -34,6 +35,9 @@ namespace WebAdvertisements.AdvertApi
             services.AddControllers();
 
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+
+            services.AddHealthChecks()
+                .AddCheck<StorageHealthCheck>("Storage");
 
             services.AddAWSService<IAmazonDynamoDB>();
 

@@ -21,6 +21,12 @@ namespace WebAdvertisements.AdvertApi.Services
             _client = client;
         }
 
+        public async Task<bool> CheckHealthAsync()
+        {
+            var tableData = await _client.DescribeTableAsync("Advertisements");
+            return string.Compare(tableData.Table.TableStatus, "active", true) == 0;
+        }
+
         public async Task<string> Add(Advertisement advertisement)
         {
             var dbModel = _mapper.Map<AdvertisementDb>(advertisement);

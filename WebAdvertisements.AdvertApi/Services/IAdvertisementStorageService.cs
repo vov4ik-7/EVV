@@ -12,6 +12,8 @@ namespace WebAdvertisements.AdvertApi.Services
 
         Task Confirm(ConfirmAdvertisement confirm);
 
+        Task<bool> CheckHealthAsync();
+
         Task<Advertisement> GetByIdAsync(string id);
 
         Task<List<Advertisement>> GetAllAsync();
