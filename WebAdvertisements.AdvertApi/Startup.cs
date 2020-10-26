@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebAdvertisements.AdvertApi.Services;
 
 namespace WebAdvertisements.AdvertApi
 {
@@ -31,9 +32,6 @@ namespace WebAdvertisements.AdvertApi
             services.AddTransient<IAdvertisementStorageService, DynamoDbAdvertStorageService>();
 
             services.AddControllers();
-
-            services.AddHealthChecks()
-                .AddCheck<StorageHealthCheck>("Storage");
 
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 
