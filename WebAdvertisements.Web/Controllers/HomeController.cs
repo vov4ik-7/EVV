@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAdvertisement.Web.ServiceClients;
 using WebAdvertisement.Web.ViewModels.Home;
+using WebAdvertisements.Web.ServiceClients;
 using WebAdvertisements.Web.ViewModels;
+using WebAdvertisements.Web.ViewModels.Home;
 
 namespace WebAdvertisements.Web.Controllers
 {
@@ -18,17 +20,24 @@ namespace WebAdvertisements.Web.Controllers
     {
         private readonly ISearchApiClient _searchApiClient;
         private readonly IMapper _mapper;
+        private readonly IAdvertApiClient _advertApiClient;
 
         public HomeController(ISearchApiClient searchApiClient,
-            IMapper mapper)
+            IMapper mapper,
+            IAdvertApiClient advertApiClient)
         {
             _searchApiClient = searchApiClient;
             _mapper = mapper;
+            _advertApiClient = advertApiClient;
         }
 
-        public IActionResult Index()
+        [Authorize]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var allAds = await _advertApiClient.GetAllAsync();
+            var allViewModels = allAds.Select(x => _mapper.Map<IndexViewModel>(x));
+
+            return View(allViewModels);
         }
 
         public IActionResult Privacy()
