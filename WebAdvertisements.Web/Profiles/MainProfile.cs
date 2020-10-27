@@ -19,6 +19,9 @@ namespace WebAdvertisements.Web.Profiles
 
             CreateMap<CreateAdvertisement, CreateAdvertisementViewModel>()
                 .ReverseMap();
+
+            CreateMap<AdvertType, SearchViewModel>()
+                .ReverseMap();
         }
     }
 }
